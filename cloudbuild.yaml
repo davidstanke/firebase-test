@@ -1,0 +1,17 @@
+secrets: 
+  - 
+    kmsKeyName: projects/stanke-firebase-test/locations/global/keyRings/firebasetest/cryptoKeys/firebasetoken
+    secretEnv: 
+      FIREBASE_TOKEN: "\
+      CiQAxfEQLoZykpWwc/3zoxyf5FjkKt5zf1qVNYYn3WYR4PmB/poSkAEAFksMp5qbIs+6lZ1D/hgi\
+      4Oy0jahp/mzkA8LQLWVNLUZnGI4jM2hvT1Hxa89rwNik3GbMh13MJy5v8eChZCUc8WqR3d3ljx0p\
+      nFWX1fqnu4Zhvn0e7G8qeCCGEhoK4XYVaJTzt6JNr3OsEDfM6yzKhqLbVn2N694FIh7ASgo79OUD\
+      1M0IphHUB/dRVUaetSM="
+steps: 
+  - name: gcr.io/$PROJECT_ID/firebase
+    args: 
+      - "-c"
+      - "firebase deploy --project=$PROJECT_ID --only=hosting --token=$$FIREBASE_TOKEN\n"
+    entrypoint: bash
+    secretEnv: 
+      - FIREBASE_TOKEN
